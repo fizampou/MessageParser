@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Parser: NSObject {
+class Parser {
     
     var entitiesStack = [String]()
     
