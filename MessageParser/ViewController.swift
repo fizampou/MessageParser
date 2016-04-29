@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         
         let parser = Parser()
         
-        parser.parseEntitiesInText("this is a normal text https://www.in.gr this is a normal text https://google.cz (shit) (happens) ((skata)) (skataskataskata) (skataskataska) (skataskataskat) (1221211212121) (3122121121212122)")
+        parser.parseEntitiesInText("this is a normal text https://www.in.gr this is a normal text https://google.cz (shit) (happens) ((skata)) (skataskataskata) (skataskataska) (skataskataskat) (1221211212121) (3122121121212122) @mention @zaabalonso ")
     }
 
     override func didReceiveMemoryWarning() {

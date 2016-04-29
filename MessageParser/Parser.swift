@@ -17,7 +17,9 @@ class Parser: NSObject {
         
         let numberOfEmoticons = extractEmoticonsInText(text);
         
-        print("number of links: \(numberOfLinks), number of emoticons: \(numberOfEmoticons)")
+        let numberOfMentions = extractMentionsInText(text);
+        
+        print("number of links: \(numberOfLinks), number of emoticons: \(numberOfEmoticons), number of mentions \(numberOfMentions)")
         
         print(entitiesStack)
     }
@@ -54,8 +56,20 @@ class Parser: NSObject {
         return matches
     }
     
-    private func extractMentionsInText (text:String) {
-        //return # of mentions
+    private func extractMentionsInText (text:String) -> Int {
+
+        let regex   = try! NSRegularExpression(pattern: "(?<=\\@)[A-Za-z0-9.-]+", options: [])
+        let range   = NSMakeRange(0, (text as NSString).length)
+        var matches = 0
+        
+        regex.enumerateMatchesInString(text, options: [], range: range)
+        {
+            (result, _, _) in
+            self.entitiesStack.append((text as NSString).substringWithRange(result!.range))
+            matches += 1
+        }
+        
+        return matches
     }
 
 }
