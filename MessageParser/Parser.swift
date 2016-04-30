@@ -8,67 +8,39 @@
 
 import UIKit
 
-class Parser {
+var emoticonParser = EmoticonParser()
+var mentionParser  = MentionParser()
+var linkParser     = LinkParser()
+
+protocol EntitiesParser {
+    var entitiesStack: [Entitiy] {get}
+    func parseEntitiesInText(text:String)
+}
+
+enum Entitiy {
+    case Mention(String)
+    case Emoticon(String)
+    case Link(String, (String) -> String)
+}
+
+class Parser : EntitiesParser {
     
-    var entitiesStack = [String]()
+    var entitiesStack = [Entitiy]()
     
     func parseEntitiesInText (text:String) {
-        let numberOfLinks = extractLinksInText(text);
+        linkParser.parseEntitiesInText(text);
+        let numberOfLinks = linkParser.numberOfEntities()
+            
+        emoticonParser.parseEntitiesInText(text);
+        let numberOfEmoticons = emoticonParser.numberOfEntities()
         
-        let numberOfEmoticons = extractEmoticonsInText(text);
-        
-        let numberOfMentions = extractMentionsInText(text);
+        mentionParser.parseEntitiesInText(text);
+        let numberOfMentions = mentionParser.numberOfEntities()
         
         print("number of links: \(numberOfLinks), number of emoticons: \(numberOfEmoticons), number of mentions \(numberOfMentions)")
         
+        entitiesStack = Array([linkParser.entitiesStack, emoticonParser.entitiesStack, mentionParser.entitiesStack].flatten())
+        
         print(entitiesStack)
-    }
-    
-    private func extractLinksInText (text:String) -> Int {
-        
-        let detector = try! NSDataDetector(types: NSTextCheckingType.Link.rawValue)
-        let range    = NSMakeRange(0, (text as NSString).length)
-        var matches  = 0
-        
-        detector.enumerateMatchesInString(text, options: [], range: range)
-        {
-            (result, _, _) in
-                self.entitiesStack.append((text as NSString).substringWithRange(result!.range))
-                matches += 1
-        }
-        
-        return matches
-    }
-    
-    private func extractEmoticonsInText (text:String) -> Int {
-        
-        let regex   = try! NSRegularExpression(pattern: "(?<=\\()[^()]{1,15}(?=\\))", options: [])
-        let range   = NSMakeRange(0, (text as NSString).length)
-        var matches = 0
-        
-        regex.enumerateMatchesInString(text, options: [], range: range)
-        {
-            (result, _, _) in
-                self.entitiesStack.append((text as NSString).substringWithRange(result!.range))
-                matches += 1
-        }
-        
-        return matches
-    }
-    
-    private func extractMentionsInText (text:String) -> Int {
-
-        let regex   = try! NSRegularExpression(pattern: "(?<=\\@)[A-Za-z0-9.-]+", options: [])
-        let range   = NSMakeRange(0, (text as NSString).length)
-        var matches = 0
-        
-        regex.enumerateMatchesInString(text, options: [], range: range)
-        {
-            (result, _, _) in
-            self.entitiesStack.append((text as NSString).substringWithRange(result!.range))
-            matches += 1
-        }
-        
-        return matches
     }
 }

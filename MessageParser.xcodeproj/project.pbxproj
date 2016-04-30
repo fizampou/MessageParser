@@ -14,6 +14,9 @@
 		B774734A1CD290AC000EF17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B77473481CD290AC000EF17F /* LaunchScreen.storyboard */; };
 		B77473551CD290AD000EF17F /* MessageParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77473541CD290AD000EF17F /* MessageParserTests.swift */; };
 		B77473601CD3493B000EF17F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B774735F1CD3493B000EF17F /* Parser.swift */; };
+		B77473621CD5293D000EF17F /* EmoticonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77473611CD5293D000EF17F /* EmoticonParser.swift */; };
+		B77473641CD5316D000EF17F /* MentionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77473631CD5316D000EF17F /* MentionParser.swift */; };
+		B77473661CD532E1000EF17F /* LinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77473651CD532E1000EF17F /* LinkParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		B77473541CD290AD000EF17F /* MessageParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParserTests.swift; sourceTree = "<group>"; };
 		B77473561CD290AD000EF17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B774735F1CD3493B000EF17F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		B77473611CD5293D000EF17F /* EmoticonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonParser.swift; sourceTree = "<group>"; };
+		B77473631CD5316D000EF17F /* MentionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionParser.swift; sourceTree = "<group>"; };
+		B77473651CD532E1000EF17F /* LinkParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,9 @@
 				B77473481CD290AC000EF17F /* LaunchScreen.storyboard */,
 				B774734B1CD290AC000EF17F /* Info.plist */,
 				B774735F1CD3493B000EF17F /* Parser.swift */,
+				B77473611CD5293D000EF17F /* EmoticonParser.swift */,
+				B77473631CD5316D000EF17F /* MentionParser.swift */,
+				B77473651CD532E1000EF17F /* LinkParser.swift */,
 			);
 			path = MessageParser;
 			sourceTree = "<group>";
@@ -200,8 +209,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B77473661CD532E1000EF17F /* LinkParser.swift in Sources */,
+				B77473641CD5316D000EF17F /* MentionParser.swift in Sources */,
 				B77473421CD290AC000EF17F /* ViewController.swift in Sources */,
 				B77473401CD290AC000EF17F /* AppDelegate.swift in Sources */,
+				B77473621CD5293D000EF17F /* EmoticonParser.swift in Sources */,
 				B77473601CD3493B000EF17F /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +404,7 @@
 				B774735B1CD290AD000EF17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B774735C1CD290AD000EF17F /* Build configuration list for PBXNativeTarget "MessageParserTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +413,7 @@
 				B774735E1CD290AD000EF17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
