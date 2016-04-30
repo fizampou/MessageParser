@@ -18,42 +18,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-q1-fYB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-q1-fYB">
                                 <rect key="frame" x="20" y="54" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-7d-xyq">
-                                <rect key="frame" x="20" y="106" width="90" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-7d-xyq">
+                                <rect key="frame" x="20" y="106" width="39" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Parse"/>
                                 <connections>
                                     <action selector="ParseMessage" destination="BYZ-38-t0r" eventType="touchUpInside" id="iW5-lf-8kU"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dhy-eg-seU">
-                                <rect key="frame" x="20" y="54" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J53-ai-H2X">
-                                <rect key="frame" x="20" y="54" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="J53-ai-H2X" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="34" id="3eF-z8-rgN"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="J53-ai-H2X" secondAttribute="leading" id="Cw2-df-8mk"/>
-                            <constraint firstItem="8xv-7d-xyq" firstAttribute="top" secondItem="J53-ai-H2X" secondAttribute="bottom" constant="22" id="RjQ-sH-eWs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Dhy-eg-seU" secondAttribute="trailing" id="VkE-Aq-FwS"/>
+                            <constraint firstItem="QFa-q1-fYB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="34" id="KkI-RU-WhO"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="QFa-q1-fYB" secondAttribute="leading" id="YmA-fm-RWU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QFa-q1-fYB" secondAttribute="trailing" id="go9-yg-chi"/>
+                            <constraint firstItem="8xv-7d-xyq" firstAttribute="top" secondItem="QFa-q1-fYB" secondAttribute="bottom" constant="22" id="nlG-Ne-aVk"/>
                             <constraint firstAttribute="leadingMargin" secondItem="8xv-7d-xyq" secondAttribute="leading" id="uHE-CG-Bht"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="J53-ai-H2X" secondAttribute="trailing" id="xAh-Ha-viM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="InputField" destination="QFa-q1-fYB" id="AJY-Y1-o1U"/>
                         <outlet property="inputField" destination="QFa-q1-fYB" id="fND-RC-wPC"/>
                     </connections>
                 </viewController>

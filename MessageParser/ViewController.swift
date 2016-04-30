@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var parser : Parser!
+    let parser = Parser()
     
     @IBOutlet weak var inputField: UITextField!
     
@@ -20,8 +20,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        parser = Parser()
     }
     
     override func didReceiveMemoryWarning() {
