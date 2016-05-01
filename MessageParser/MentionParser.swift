@@ -11,7 +11,7 @@ import Foundation
 class MentionParser: EntitiesParser {
     
     let mentionRegex = "(?<=\\@)[A-Za-z0-9.-]+"
-    var entitiesStack = [Entitiy]()
+    var entitiesStack = [Entity]()
     
     func parseEntitiesInText (text:String) {
         extractMentionsInText(text);
@@ -31,7 +31,7 @@ class MentionParser: EntitiesParser {
             (result, _, _) in
             let mention = (text as NSString).substringWithRange(result!.range)
             
-            self.entitiesStack.append(Entitiy.Mention(mention))
+            self.entitiesStack.append(Entity.Mention(mention))
         }
     }
 }

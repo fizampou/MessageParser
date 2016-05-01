@@ -11,7 +11,7 @@ import Foundation
 
 class LinkParser: EntitiesParser {
     
-    var entitiesStack = [Entitiy]()
+    var entitiesStack = [Entity]()
     var delegate: EntitiesParserDelegate?
 
     internal var linksStack = [String]()
@@ -32,7 +32,6 @@ class LinkParser: EntitiesParser {
         detector.enumerateMatchesInString(text, options:NSMatchingOptions.ReportCompletion, range: range)
         {
             (result, _, _) in
-            
             if (result != nil) {
                 
                 let link = (text as NSString).substringWithRange(result!.range)
@@ -46,7 +45,7 @@ class LinkParser: EntitiesParser {
     
     private func extractTitleInHtml () {
         
-        for (index, link) in linksStack.enumerate() {
+        for (index, link) in self.linksStack.enumerate() {
             
             guard let url = NSURL(string: link) else {
                 continue;
@@ -57,15 +56,14 @@ class LinkParser: EntitiesParser {
             NSURLSession.sharedSession().dataTaskWithRequest(request) {
             
                 (data, response, error) in
-            
                 if (error == nil) {
                     let datastring = String(data: data!, encoding: NSASCIIStringEncoding)
                     let title = datastring!.sliceFrom("<title>", to: "</title>")!
-                    
-                    self.entitiesStack.append(Entitiy.Link([link, title]))
+
+                    self.entitiesStack.append(Entity.Link(["url": link, "title": title]))
                 } else {
                     
-                    self.entitiesStack.append(Entitiy.Link([link, "no title fetched"]))
+                    self.entitiesStack.append(Entity.Link(["url": link]))
                 }
                 
                 if (index == self.linksStack.count - 1) {

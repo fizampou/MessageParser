@@ -11,7 +11,7 @@ import Foundation
 class EmoticonParser: EntitiesParser {
 
     let emoticonRegex = "(?<=\\()[^()]{1,15}(?=\\))"
-    var entitiesStack = [Entitiy]()
+    var entitiesStack = [Entity]()
     
     func parseEntitiesInText (text:String) {
         extractEmoticonsInText(text);
@@ -31,7 +31,7 @@ class EmoticonParser: EntitiesParser {
             (result, _, _) in
             let emoticon = (text as NSString).substringWithRange(result!.range)
             
-            self.entitiesStack.append(Entitiy.Emoticon(emoticon))
+            self.entitiesStack.append(Entity.Emoticon(emoticon))
         }
     }
 }
