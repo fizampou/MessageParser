@@ -17,30 +17,33 @@ protocol EntitiesParser {
     func parseEntitiesInText(text:String)
 }
 
+protocol EntitiesParserDelegate: class{
+    func htmlTitlesDidFetch()
+}
+
 enum Entitiy {
     case Mention(String)
     case Emoticon(String)
     case Link([String])
 }
 
-class Parser : EntitiesParser {
-    
-    var entitiesStack = [Entitiy]()
-    
+class Parser: EntitiesParserDelegate {
+
+    init() {
+        linkParser.delegate = self
+    }
+
     func parseEntitiesInText (text:String) {
+        
         linkParser.parseEntitiesInText(text);
-        let numberOfLinks = linkParser.numberOfEntities()
-            
         emoticonParser.parseEntitiesInText(text);
-        let numberOfEmoticons = emoticonParser.numberOfEntities()
-        
         mentionParser.parseEntitiesInText(text);
-        let numberOfMentions = mentionParser.numberOfEntities()
-        
-        print("number of links: \(numberOfLinks), number of emoticons: \(numberOfEmoticons), number of mentions \(numberOfMentions)")
-        
-        entitiesStack = Array([linkParser.entitiesStack, emoticonParser.entitiesStack, mentionParser.entitiesStack].flatten())
-        
-        print(entitiesStack)
+    
+    }
+    
+    func htmlTitlesDidFetch() {
+        print("number of links: \(linkParser.numberOfEntities()), number of emoticons: \(emoticonParser.numberOfEntities()), number of mentions \(mentionParser.numberOfEntities())")
+
+        print(Array([linkParser.entitiesStack, emoticonParser.entitiesStack, mentionParser.entitiesStack].flatten()))
     }
 }
