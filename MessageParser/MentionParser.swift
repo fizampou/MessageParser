@@ -12,6 +12,7 @@ class MentionParser: EntitiesParser {
     
     let mentionRegex = "(?<=\\@)[A-Za-z0-9.-]+"
     var entitiesStack = [Entity]()
+    var delegate: EntitiesParserDelegate?
     
     func parseEntitiesInText (text:String) {
         extractMentionsInText(text);
@@ -26,9 +27,16 @@ class MentionParser: EntitiesParser {
         let regex   = try! NSRegularExpression(pattern: mentionRegex, options: [])
         let range   = NSMakeRange(0, (text as NSString).length)
         
-        regex.enumerateMatchesInString(text, options: [], range: range)
+        regex.enumerateMatchesInString(text, options:NSMatchingOptions.ReportCompletion, range: range)
         {
             (result, _, _) in
+            
+            if (result == nil) {
+                // completed
+                self.delegate?.entitiesDidFetch("Mentions")
+                return;
+            }
+            
             let mention = (text as NSString).substringWithRange(result!.range)
             
             self.entitiesStack.append(Entity.Mention(mention))

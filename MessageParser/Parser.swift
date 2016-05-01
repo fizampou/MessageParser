@@ -25,13 +25,15 @@ protocol EntitiesParser {
 }
 
 protocol EntitiesParserDelegate: class{
-    func htmlTitlesDidFetch()
+    func entitiesDidFetch(entity:String)
 }
 
 class Parser: EntitiesParserDelegate {
 
     init() {
         linkParser.delegate = self
+        mentionParser.delegate = self
+        emoticonParser.delegate = self
     }
 
     func parseEntitiesInText (text:String) {
@@ -40,10 +42,17 @@ class Parser: EntitiesParserDelegate {
         mentionParser.parseEntitiesInText(text);
     }
     
-    func htmlTitlesDidFetch() {
-        entitiesDictionary["mentions"]  = mentionParser.entitiesStack
-        entitiesDictionary["emoticons"] = emoticonParser.entitiesStack
-        entitiesDictionary["links"]     = linkParser.entitiesStack
+    func entitiesDidFetch(entity:String) {
+        switch entity {
+            case "Links":
+                entitiesDictionary["links"] = linkParser.entitiesStack
+            case "Mentions":
+                entitiesDictionary["mentions"] = mentionParser.entitiesStack
+            case "Emoticons":
+                entitiesDictionary["emoticons"] = emoticonParser.entitiesStack
+            default:
+                print("wrong entity detected")
+        }
 
         
         print("number of links: \(linkParser.numberOfEntities()), number of emoticons: \(emoticonParser.numberOfEntities()), number of mentions \(mentionParser.numberOfEntities())")

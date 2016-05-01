@@ -33,11 +33,9 @@ class LinkParser: EntitiesParser {
         {
             (result, _, _) in
             if (result != nil) {
-                
                 let link = (text as NSString).substringWithRange(result!.range)
                 self.linksStack.append(link)
             } else {
-                
                 self.extractTitleInHtml()
             }
         }
@@ -62,12 +60,11 @@ class LinkParser: EntitiesParser {
 
                     self.entitiesStack.append(Entity.Link(["url": link, "title": title]))
                 } else {
-                    
                     self.entitiesStack.append(Entity.Link(["url": link]))
                 }
                 
                 if (index == self.linksStack.count - 1) {
-                    self.delegate?.htmlTitlesDidFetch()
+                    self.delegate?.entitiesDidFetch("Links")
                 }
             }.resume()
         }
