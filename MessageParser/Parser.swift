@@ -37,6 +37,8 @@ class Parser: EntitiesParserDelegate {
     }
 
     func parseEntitiesInText (text:String) {
+        cleanResults()
+        
         linkParser.parseEntitiesInText(text);
         emoticonParser.parseEntitiesInText(text);
         mentionParser.parseEntitiesInText(text);
@@ -54,13 +56,14 @@ class Parser: EntitiesParserDelegate {
                 print("wrong entity detected")
         }
 
-        
         print("number of links: \(linkParser.numberOfEntities()), number of emoticons: \(emoticonParser.numberOfEntities()), number of mentions \(mentionParser.numberOfEntities())")
 
         print(entitiesDictionary)
     }
     
-    func jsonResults() {
-    
+    func cleanResults() {
+        linkParser.clearEntities()
+        emoticonParser.clearEntities()
+        mentionParser.clearEntities()
     }
 }

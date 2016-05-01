@@ -24,6 +24,11 @@ class LinkParser: EntitiesParser {
         return entitiesStack.count;
     }
     
+    func clearEntities () {
+        self.linksStack = []
+        self.entitiesStack = []
+    }
+    
     private func extractLinksInText (text:String) {
         
         let detector = try! NSDataDetector(types: NSTextCheckingType.Link.rawValue)

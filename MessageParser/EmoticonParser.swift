@@ -21,6 +21,10 @@ class EmoticonParser: EntitiesParser {
     func numberOfEntities () -> Int {
         return entitiesStack.count;
     }
+    
+    func clearEntities () {
+        self.entitiesStack = []
+    }
 
     private func extractEmoticonsInText (text:String) {
         

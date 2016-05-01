@@ -22,6 +22,10 @@ class MentionParser: EntitiesParser {
         return entitiesStack.count;
     }
     
+    func clearEntities () {
+        self.entitiesStack = []
+    }
+    
     private func extractMentionsInText (text:String) {
         
         let regex   = try! NSRegularExpression(pattern: mentionRegex, options: [])
