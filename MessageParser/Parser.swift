@@ -14,14 +14,10 @@ enum Entity {
     case Link([String:String])
 }
 
-var emoticonParser     = EmoticonParser()
-var mentionParser      = MentionParser()
-var linkParser         = LinkParser()
-var entitiesDictionary = [String:[Entity]]()
-
 protocol EntitiesParser {
     var entitiesStack: [Entity] {get}
     func parseEntitiesInText(text:String)
+    func clearEntities ()
 }
 
 protocol EntitiesParserDelegate: class{
@@ -29,6 +25,12 @@ protocol EntitiesParserDelegate: class{
 }
 
 class Parser: EntitiesParserDelegate {
+    
+    var emoticonParser     = EmoticonParser()
+    var mentionParser      = MentionParser()
+    var linkParser         = LinkParser()
+    var entitiesDictionary = [String:[Entity]]()
+    var delegate: parseCompleteDelegate?
 
     init() {
         linkParser.delegate = self
@@ -55,13 +57,14 @@ class Parser: EntitiesParserDelegate {
             default:
                 print("wrong entity detected")
         }
-
-        print("number of links: \(linkParser.numberOfEntities()), number of emoticons: \(emoticonParser.numberOfEntities()), number of mentions \(mentionParser.numberOfEntities())")
-
-        print(entitiesDictionary)
+        
+        if (entitiesDictionary.keys.count == 3) {
+            self.delegate?.parsingDidFinish(entitiesDictionary)
+        }
     }
     
     func cleanResults() {
+        entitiesDictionary = [:]
         linkParser.clearEntities()
         emoticonParser.clearEntities()
         mentionParser.clearEntities()

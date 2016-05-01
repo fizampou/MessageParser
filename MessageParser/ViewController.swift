@@ -8,18 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol parseCompleteDelegate: class{
+    func parsingDidFinish(dict:[String:[Entity]])
+}
+
+class ViewController: UIViewController, parseCompleteDelegate {
     
     let parser = Parser()
     
     @IBOutlet weak var inputField: UITextField!
-    
+
     @IBAction func ParseMessage() {
         parser.parseEntitiesInText(inputField.text!);
     }
     
+    func parsingDidFinish (dict:[String:[Entity]]) {
+        print(dict)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        parser.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
