@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class LinkParser: EntitiesParser {
     
     var entitiesStack = [Entitiy]()
@@ -32,14 +33,24 @@ class LinkParser: EntitiesParser {
             let link = (text as NSString).substringWithRange(result!.range)
             
             guard let url = NSURL(string: link) else {
+                self.entitiesStack.append(Entitiy.Link([link, ""]))
                 return
             }
+            
             let request = NSMutableURLRequest(URL:url)
             
-            NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
-                    let datastring = String(data: data!, encoding: NSUTF8StringEncoding)!
-                    let title = datastring.sliceFrom("<title>", to: "</title>")!
+            NSURLSession.sharedSession().dataTaskWithRequest(request) {
+                
+                (data, response, error) in
+                
+                if (error == nil) {
+                    let datastring = String(data: data!, encoding: NSASCIIStringEncoding)
+                    let title = datastring!.sliceFrom("<title>", to: "</title>")!
                     self.entitiesStack.append(Entitiy.Link([link, title]))
+                } else {
+                    self.entitiesStack.append(Entitiy.Link([link, ""]))
+                }
+                
             }.resume()
         }
     }
