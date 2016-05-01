@@ -28,10 +28,29 @@ class LinkParser: EntitiesParser {
         detector.enumerateMatchesInString(text, options: [], range: range)
         {
             (result, _, _) in
+            
             let link = (text as NSString).substringWithRange(result!.range)
             
-            self.entitiesStack.append(Entitiy.Link(link){$0})
+            guard let url = NSURL(string: link) else {
+                return
+            }
+            let request = NSMutableURLRequest(URL:url)
+            
+            NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) in
+                    let datastring = String(data: data!, encoding: NSUTF8StringEncoding)!
+                    let title = datastring.sliceFrom("<title>", to: "</title>")!
+                    self.entitiesStack.append(Entitiy.Link([link, title]))
+            }.resume()
         }
     }
+}
 
+extension String {
+    func sliceFrom(start: String, to: String) -> String? {
+        return (rangeOfString(start)?.endIndex).flatMap { sInd in
+            (rangeOfString(to, range: sInd..<endIndex)?.startIndex).map { eInd in
+                substringWithRange(sInd..<eInd)
+            }
+        }
+    }
 }

@@ -33,6 +33,5 @@ class EmoticonParser: EntitiesParser {
             
             self.entitiesStack.append(Entitiy.Emoticon(emoticon))
         }
-
     }
 }

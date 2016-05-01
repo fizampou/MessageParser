@@ -6,7 +6,7 @@
 //  Copyright © 2016 Filippos Zampounis. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 var emoticonParser = EmoticonParser()
 var mentionParser  = MentionParser()
@@ -20,7 +20,7 @@ protocol EntitiesParser {
 enum Entitiy {
     case Mention(String)
     case Emoticon(String)
-    case Link(String, (String) -> String)
+    case Link([String])
 }
 
 class Parser : EntitiesParser {
